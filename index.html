@@ -1,50 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evil Pongon Game — Twitch Drop</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #0e0e10;
       color: #efeff1;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 40px 20px;
+      padding: 24px;
     }
+
     .card {
       background: #18181b;
-      border: 1px solid #3a3a3d;
-      border-radius: 16px;
+      border: 1px solid #2d2d30;
+      border-radius: 12px;
       padding: 48px 40px;
       max-width: 480px;
       width: 100%;
+      text-align: center;
     }
-    .twitch-icon {
-      width: 56px; height: 56px;
-      background: #9147ff;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 16px;
     }
-    .twitch-icon svg { width: 32px; height: 32px; fill: white; }
-    h1 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-    p { color: #adadb8; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
-    .purple { color: #9147ff; font-weight: 700; }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #a78bfa;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #adadb8;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .steps {
+      text-align: left;
+      background: #0e0e10;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 0;
+    }
+
+    .steps p {
+      font-size: 0.9rem;
+      color: #adadb8;
+      margin-bottom: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .steps ol {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .steps li {
+      font-size: 0.95rem;
+      color: #efeff1;
+      line-height: 1.8;
+    }
+
+    /* ── OAuth callback state ── */
+    #callback { display: none; }
+
+    .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid #2d2d30;
+      border-top-color: #a78bfa;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #status {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #a78bfa;
+      margin-bottom: 8px;
+    }
+
+    #detail {
+      font-size: 0.9rem;
+      color: #adadb8;
+    }
+
+    .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .error-icon   { font-size: 48px; margin-bottom: 16px; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="twitch-icon">
-      <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+<div class="card">
+
+  <!-- Normal info page -->
+  <div id="info">
+    <div class="logo">🎮</div>
+    <h1>Evil Pongon Game — Twitch Drops</h1>
+    <p class="subtitle">Watch Evil Pongon Game streams on Twitch to earn exclusive in-game rewards!</p>
+    <div class="steps">
+      <p>How to claim</p>
+      <ol>
+        <li>Watch a participating stream on Twitch</li>
+        <li>Claim the drop in your Twitch Drops Inventory</li>
+        <li>Open <strong>Evil Pongon Game</strong> on Steam</li>
+        <li>Click the <strong>Twitch icon</strong> in the main menu</li>
+        <li>Log in — your reward unlocks automatically!</li>
+      </ol>
     </div>
-    <h1><span class="purple">Evil Pongon Game</span> — Twitch Drops</h1>
-    <p>To claim your Twitch Drop reward, open Evil Pongon Game on Steam and click the Twitch icon in the main menu.</p>
   </div>
+
+  <!-- OAuth callback UI (shown when Twitch redirects here) -->
+  <div id="callback">
+    <div id="spinner-wrap"><div class="spinner"></div></div>
+    <div id="icon" style="display:none"></div>
+    <div id="status">Connecting to Evil Pongon Game…</div>
+    <div id="detail">Please keep this tab open.</div>
+  </div>
+
+</div>
+
+<script>
+  // Twitch OAuth implicit flow puts the token in the URL fragment.
+  // Fragments are never sent to the server, so we handle this entirely in JS.
+  (function () {
+    var hash = location.hash;
+    if (!hash.includes('access_token=')) return; // normal visit — show info page
+
+    // Switch to callback UI
+    document.getElementById('info').style.display = 'none';
+    document.getElementById('callback').style.display = 'block';
+
+    var token = hash.split('access_token=')[1].split('&')[0];
+    if (!token) return setError('Could not read token from URL.');
+
+    // Send token to the game's local TCP server
+    fetch('http://localhost:3000/token?t=' + token)
+      .then(function () { setSuccess(); })
+      .catch(function () {
+        // fetch failed — game might not be running or port blocked
+        setError('Could not reach the game. Make sure Evil Pongon Game is open, then try again.');
+      });
+
+    function setSuccess() {
+      document.getElementById('spinner-wrap').style.display = 'none';
+      var icon = document.getElementById('icon');
+      icon.className = 'success-icon';
+      icon.textContent = '✅';
+      icon.style.display = 'block';
+      document.getElementById('status').textContent = 'Connected! Return to Evil Pongon Game.';
+      document.getElementById('detail').textContent = 'You can close this tab.';
+    }
+
+    function setError(msg) {
+      document.getElementById('spinner-wrap').style.display = 'none';
+      var icon = document.getElementById('icon');
+      icon.className = 'error-icon';
+      icon.textContent = '❌';
+      icon.style.display = 'block';
+      document.getElementById('status').style.color = '#f87171';
+      document.getElementById('status').textContent = 'Connection failed';
+      document.getElementById('detail').textContent = msg;
+    }
+  })();
+</script>
 </body>
 </html>
