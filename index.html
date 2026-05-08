@@ -1,222 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Evil Pongon Game — Twitch Drop</title>
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+.smiley{width:20px;height:20px;vertical-align:middle;image-rendering:pixelated}
+.navlink{color:#00ffff;text-decoration:underline;cursor:default}
+</style>
+<div style="background:#000080;width:1920px;min-height:1080px;font-family:'Comic Sans MS','Comic Sans',cursive;color:#ffff00;border:4px ridge #c0c0c0;overflow:hidden">
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0e0e10;
-      color: #efeff1;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .card {
-      background: #18181b;
-      border: 1px solid #2d2d30;
-      border-radius: 12px;
-      padding: 48px 40px;
-      max-width: 520px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #a78bfa;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 1.05rem;
-      color: #efeff1;
-      line-height: 1.8;
-      margin-bottom: 32px;
-    }
-
-    .steps {
-      text-align: left;
-      background: #0e0e10;
-      border-radius: 8px;
-      padding: 20px 24px;
-      border: 1px solid #2d2d30;
-    }
-
-    .steps p {
-      font-size: 0.9rem;
-      color: #adadb8;
-      margin-bottom: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .steps ol {
-      padding-left: 20px;
-      margin-top: 8px;
-    }
-
-    .steps li {
-      font-size: 1rem;
-      color: #efeff1;
-      line-height: 1.9;
-    }
-
-    strong {
-      color: #ffffff;
-    }
-
-    /* KEEP THESE FOR GAME CALLBACKS */
-    #callback { display: none; }
-
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #2d2d30;
-      border-top-color: #a78bfa;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 20px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    #status {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #a78bfa;
-      margin-bottom: 8px;
-    }
-
-    #detail {
-      font-size: 0.9rem;
-      color: #adadb8;
-    }
-
-    .success-icon,
-    .error-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="card">
-
-  <!-- Main info page -->
-  <div id="info">
-    <div class="logo">🎮</div>
-
-    <h1>
-      HEY! YOU DON'T HAVE TO CONNECT YOUR ACCOUNT!
-    </h1>
-
-    <p class="subtitle">
-      Open <strong>Evil Pongon Game</strong> and click the
-      <strong>Twitch logo</strong> in the main menu.<br><br>
-
-      It'll redeem automatically.
-    </p>
-
-    <div class="steps">
-      <p>How to redeem</p>
-
-      <ol>
-        <li>Open <strong>Evil Pongon Game</strong></li>
-        <li>Click the <strong>Twitch logo</strong></li>
-        <li>Your Twitch Drop redeems automatically</li>
-        <li>That's literally it</li>
-      </ol>
-    </div>
+  <div style="background:#c0c0c0;padding:5px 10px;display:flex;align-items:center;gap:6px;border-bottom:2px solid #808080">
+    <span style="font-family:Arial,sans-serif;font-size:14px;color:#000;font-weight:bold">Evil Pongon Game - Official Site - Microsoft Internet Explorer</span>
   </div>
 
-  <!-- OAuth callback UI -->
-  <div id="callback">
-    <div id="spinner-wrap">
-      <div class="spinner"></div>
-    </div>
-
-    <div id="icon" style="display:none"></div>
-
-    <div id="status">
-      Connecting to Evil Pongon Game…
-    </div>
-
-    <div id="detail">
-      Please keep this tab open.
-    </div>
+  <div style="background:#d4d0c8;padding:4px 8px;border-bottom:2px solid #808080">
+    <span style="font-family:Arial;font-size:13px;color:#000">File &nbsp; Edit &nbsp; View &nbsp; Favorites &nbsp; Tools &nbsp; Help</span>
   </div>
 
+  <marquee style="background:#ff0000;color:#ffff00;font-weight:bold;font-size:18px;padding:6px;border-top:2px solid #ff9900;border-bottom:2px solid #ff9900">
+    ★★★ WELCOME TO EVIL PONGON GAME - THE MOST EVIL GAME ON STEAM!!! ★★★ &nbsp;&nbsp;&nbsp; CLICK HERE TO WIN A FREE IPOD!!! &nbsp;&nbsp;&nbsp; 100,000 VISITORS!!! WOW!!!
+  </marquee>
+
+  <div style="padding:20px;display:flex;gap:20px">
+
+    <div style="width:220px;flex-shrink:0;background:#000066;border:2px inset #c0c0c0;padding:14px">
+      <div style="background:#ff6600;color:#fff;font-size:15px;font-weight:bold;text-align:center;padding:6px;border:1px solid #ff9900;margin-bottom:12px">★ NAVIGATION ★</div>
+      <div style="font-size:14px;line-height:2.6;color:#00ffff">
+        <div><span class="navlink">Home</span></div>
+        <div><span class="navlink">Download</span></div>
+        <div><span class="navlink">Forums</span></div>
+        <div><span class="navlink">Screenshots</span></div>
+        <div><span class="navlink">Cheats</span></div>
+        <div><span class="navlink">Contact Us</span></div>
+      </div>
+      <div style="margin-top:16px;background:#003300;border:2px inset #00ff00;padding:8px;text-align:center">
+        <div style="font-size:12px;color:#00ff00">VISITORS:</div>
+        <div style="font-size:28px;color:#00ff00;font-family:'Courier New',monospace;font-weight:bold">100,432</div>
+      </div>
+      <div style="margin-top:14px;background:#660000;border:2px outset #c0c0c0;padding:10px;font-size:12px;color:#ffff00;text-align:center">
+        BEST VIEWED IN<br>INTERNET EXPLORER 6<br>800x600
+      </div>
+      <div style="margin-top:14px;background:#003333;border:2px inset #00ffff;padding:10px;font-size:12px;color:#00ffff;text-align:center">
+        <div style="font-weight:bold;margin-bottom:6px">ONLINE NOW:</div>
+        <div style="font-size:22px;font-family:'Courier New',monospace;color:#00ff00">3</div>
+        <div style="font-size:10px;color:#888">users browsing</div>
+      </div>
+    </div>
+
+    <div style="flex:1">
+
+      <div style="background:#003366;border:3px ridge #ffff00;padding:16px;text-align:center;margin-bottom:16px">
+        <div style="font-size:42px;font-weight:bold;color:#ff6600;letter-spacing:3px">
+          😎 HOW TO CLAIM YOUR DROPS!!! 😎
+        </div>
+        <div style="font-size:14px;color:#ffffff;margin-top:6px">LAST UPDATED: NOVEMBER 14 2009 | BY ADMIN_XXEVIL_gameXx</div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;border:3px ridge #c0c0c0;background:#000033;margin-bottom:16px">
+        <tr>
+          <td style="background:#ff0000;color:#ffff00;font-size:20px;font-weight:bold;padding:10px 16px;text-align:center;border-bottom:2px solid #cc0000">
+            ⚠️ FOLLOW THESE STEPS!!! ⚠️
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 40px">
+            <ol style="color:#ffffff;font-size:22px;line-height:3;margin:0;padding-left:32px">
+              <li style="border-bottom:1px dotted #444;padding-bottom:10px">
+                <span style="color:#00ffff;font-weight:bold">Launch the Game</span>
+              </li>
+              <li style="border-bottom:1px dotted #444;padding-bottom:10px;padding-top:10px">
+                <span style="color:#00ffff;font-weight:bold">Click the Twitch logo</span>
+              </li>
+              <li style="padding-top:10px">
+                <span style="color:#00ffff;font-weight:bold">Allow Acess</span>
+              </li>
+            </ol>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#003300;padding:18px;text-align:center;border-top:2px solid #006600">
+            <span style="font-size:22px;color:#00ff00;font-weight:bold">And THAT should claim your drops after you do that!</span>
+          </td>
+        </tr>
+      </table>
+
+      <table style="width:100%;border-collapse:collapse">
+        <tr>
+          <td style="width:50%;padding-right:10px;vertical-align:top">
+            <div style="background:#330000;border:2px inset #ff6600;padding:12px">
+              <div style="color:#ff6600;font-weight:bold;font-size:15px;border-bottom:1px solid #ff6600;margin-bottom:8px;padding-bottom:6px">💬 GUESTBOOK (3 entries)</div>
+              <div style="font-size:14px;color:#ffffff;line-height:2.2">
+                <div><span style="color:#ffff00">xX_d4rkn3ss_Xx:</span> omg this game is so evil lol</div>
+                <div><span style="color:#ffff00">pongmaster99:</span> best game ever!!!!!1</div>
+                <div><span style="color:#ffff00">anonymous:</span> first!!!!</div>
+              </div>
+            </div>
+          </td>
+          <td style="width:50%;padding-left:10px;vertical-align:top">
+            <div style="background:#001a33;border:2px inset #0066ff;padding:12px">
+              <div style="color:#00aaff;font-weight:bold;font-size:15px;border-bottom:1px solid #0066ff;margin-bottom:8px;padding-bottom:6px">🔥 LATEST NEWS</div>
+              <div style="font-size:14px;color:#ffffff;line-height:2.2">
+                <div>✅ New update 1.0.3 is out!!</div>
+                <div>✅ Forums are now OPEN</div>
+                <div>✅ Wallpapers added to DL page</div>
+                <div style="color:#aaaaaa">-- more news coming soon --</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <div style="width:200px;flex-shrink:0;background:#000044;border:2px inset #c0c0c0;padding:14px">
+      <div style="background:#990099;color:#fff;font-size:14px;font-weight:bold;text-align:center;padding:6px;border:1px solid #cc00cc;margin-bottom:12px">★ POLL ★</div>
+      <div style="font-size:13px;color:#ffffff;margin-bottom:10px">Is Evil Pongon the best game ever?</div>
+      <div style="font-size:12px;color:#00ff00;line-height:2.2">
+        <div>YES!! ████████ 94%</div>
+        <div>no.. █ 6%</div>
+      </div>
+      <div style="margin-top:16px;background:#330033;border:2px inset #990099;padding:8px;text-align:center">
+        <div style="font-size:12px;color:#ff99ff;font-weight:bold;margin-bottom:6px">TOP PLAYERS</div>
+        <div style="font-size:12px;color:#ffff00;line-height:2">
+          <div>1. xX_d4rkn3ss</div>
+          <div>2. pongmaster99</div>
+          <div>3. EvilKing2009</div>
+          <div>4. n00bslayer_x</div>
+          <div>5. GamrDude007</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:#001100;border:2px inset #00ff00;padding:8px;text-align:center">
+        <div style="font-size:11px;color:#00ff00;margin-bottom:4px">SERVER STATUS</div>
+        <div style="font-size:13px;color:#00ff00;font-weight:bold">● ONLINE</div>
+        <div style="font-size:10px;color:#008800">ping: 42ms</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="background:#111111;border-top:2px solid #444;padding:8px;text-align:center;font-size:12px;color:#888888;font-family:Arial,sans-serif">
+    © 2009 EvilPongon.tk — Best viewed 800x600 — Site made with Notepad — No hotlinking!!!
+    <br><span style="color:#555">This site is a fan site and not affiliated with Steam® or Twitch™</span>
+  </div>
 </div>
-
-<script>
-  // KEEP THIS SCRIPT FOR GAME AUTH CALLBACKS
-  (function () {
-    var hash = location.hash;
-    if (!hash.includes('access_token=')) return;
-
-    document.getElementById('info').style.display = 'none';
-    document.getElementById('callback').style.display = 'block';
-
-    var token = hash.split('access_token=')[1].split('&')[0];
-    if (!token) return setError('Could not read token from URL.');
-
-    fetch('http://localhost:3000/token?t=' + token)
-      .then(function () { setSuccess(); })
-      .catch(function () {
-        setError('Could not reach the game. Make sure Evil Pongon Game is open, then try again.');
-      });
-
-    function setSuccess() {
-      document.getElementById('spinner-wrap').style.display = 'none';
-
-      var icon = document.getElementById('icon');
-      icon.className = 'success-icon';
-      icon.textContent = '✅';
-      icon.style.display = 'block';
-
-      document.getElementById('status').textContent =
-        'Connected! Return to Evil Pongon Game.';
-
-      document.getElementById('detail').textContent =
-        'You can close this tab.';
-    }
-
-    function setError(msg) {
-      document.getElementById('spinner-wrap').style.display = 'none';
-
-      var icon = document.getElementById('icon');
-      icon.className = 'error-icon';
-      icon.textContent = '❌';
-      icon.style.display = 'block';
-
-      document.getElementById('status').style.color = '#f87171';
-      document.getElementById('status').textContent =
-        'Connection failed';
-
-      document.getElementById('detail').textContent = msg;
-    }
-  })();
-</script>
-
-</body>
-</html>
