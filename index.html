@@ -1,123 +1,242 @@
-
+<!DOCTYPE html>
+<html>
+<head>
 <style>
-.smiley{width:20px;height:20px;vertical-align:middle;image-rendering:pixelated}
-.navlink{color:#00ffff;text-decoration:underline;cursor:default}
+  @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000080; font-family: 'Comic Neue', 'Comic Sans MS', cursive; color: #ffff00; }
+  .outer { width: 1920px; min-height: 1080px; border: 4px ridge #c0c0c0; overflow: hidden; background: #000080; transform-origin: top left; }
+  .titlebar { background: linear-gradient(to right, #000080, #1084d0); padding: 7px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #808080; }
+  .titlebar span { font-family: Arial, sans-serif; font-size: 20px; color: #fff; font-weight: bold; }
+  .titlebar-dots { display: flex; gap: 5px; margin-left: auto; }
+  .titlebar-dots span { width: 22px; height: 22px; display: inline-block; border: 1px solid #888; background: #c0c0c0; font-size: 14px; text-align: center; line-height: 22px; color: #000; font-weight: bold; cursor: default; }
+  .menubar { background: #d4d0c8; padding: 5px 12px; border-bottom: 2px solid #808080; font-family: Arial; font-size: 18px; color: #000; }
+  .menubar span { margin-right: 20px; cursor: default; }
+  .marquee-bar { background: #cc0000; color: #ffff00; font-weight: bold; font-size: 24px; padding: 10px; border-top: 3px solid #ff9900; border-bottom: 3px solid #ff9900; white-space: nowrap; overflow: hidden; display: flex; align-items: center; gap: 10px; }
+  .marquee-inner { display: inline-block; animation: scroll-left 32s linear infinite; white-space: nowrap; }
+  @keyframes scroll-left { 0% { transform: translateX(1920px); } 100% { transform: translateX(-100%); } }
+  .layout { display: flex; gap: 24px; padding: 24px; }
+  .leftnav { width: 280px; flex-shrink: 0; background: #000066; border: 2px inset #c0c0c0; padding: 18px; }
+  .nav-header { background: #ff6600; color: #fff; font-size: 20px; font-weight: bold; text-align: center; padding: 8px; border: 1px solid #ff9900; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .navlinks { font-size: 18px; line-height: 2.8; }
+  .navlinks a { color: #00ffff; text-decoration: underline; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .navlinks a:hover { color: #ff0; background: #000099; }
+  .counter-box { margin-top: 18px; background: #003300; border: 2px inset #00ff00; padding: 12px; text-align: center; }
+  .counter-label { font-size: 15px; color: #00ff00; }
+  .counter-num { font-size: 38px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; }
+  .ie-box { margin-top: 16px; background: #660000; border: 2px outset #c0c0c0; padding: 12px; font-size: 16px; color: #ffff00; text-align: center; }
+  .online-box { margin-top: 16px; background: #003333; border: 2px inset #00ffff; padding: 12px; text-align: center; font-size: 15px; color: #00ffff; }
+  .online-num { font-size: 28px; font-family: 'Courier New', monospace; color: #00ff00; }
+  .main { flex: 1; min-width: 0; }
+  .hero { background: #003366; border: 3px ridge #ffff00; padding: 20px; text-align: center; margin-bottom: 18px; }
+  .hero-title { font-size: 58px; font-weight: bold; color: #ff6600; letter-spacing: 3px; animation: flicker 3s step-end infinite; }
+  @keyframes flicker { 0%,100%{opacity:1}92%{opacity:1}93%{opacity:0.5}95%{opacity:1}97%{opacity:0.6}99%{opacity:1} }
+  .hero-sub { font-size: 16px; color: #ccc; margin-top: 6px; }
+  .steps-table { width: 100%; border-collapse: collapse; border: 3px ridge #c0c0c0; background: #000033; margin-bottom: 18px; }
+  .steps-header { background: #ff0000; color: #ffff00; font-size: 28px; font-weight: bold; padding: 14px 20px; text-align: center; border-bottom: 2px solid #cc0000; }
+  .steps-body { padding: 30px 50px; }
+  .steps-body ol { color: #fff; font-size: 28px; line-height: 3.2; padding-left: 36px; }
+  .steps-body ol li { border-bottom: 1px dotted #444; padding-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+  .steps-body ol li:last-child { border-bottom: none; }
+  .steps-body ol li span { color: #00ffff; font-weight: bold; }
+  .steps-footer { background: #003300; padding: 20px; text-align: center; border-top: 2px solid #006600; font-size: 26px; color: #00ff00; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .bottom-row { display: flex; gap: 16px; }
+  .guestbook { flex: 1; background: #330000; border: 2px inset #ff6600; padding: 16px; }
+  .gb-header { color: #ff6600; font-weight: bold; font-size: 20px; border-bottom: 1px solid #ff6600; margin-bottom: 10px; padding-bottom: 7px; display: flex; align-items: center; gap: 8px; }
+  .gb-name { color: #ffff00; }
+  .gb-entry { font-size: 18px; color: #fff; line-height: 2.4; display: flex; align-items: center; gap: 8px; }
+  .news-box { flex: 1; background: #001a33; border: 2px inset #0066ff; padding: 16px; }
+  .news-header { color: #00aaff; font-weight: bold; font-size: 20px; border-bottom: 1px solid #0066ff; margin-bottom: 10px; padding-bottom: 7px; display: flex; align-items: center; gap: 8px; }
+  .news-item { font-size: 18px; color: #fff; line-height: 2.4; display: flex; align-items: center; gap: 8px; }
+  .rightnav { width: 280px; flex-shrink: 0; background: #000044; border: 2px inset #c0c0c0; padding: 18px; }
+  .poll-header { background: #990099; color: #fff; font-size: 18px; font-weight: bold; text-align: center; padding: 8px; border: 1px solid #cc00cc; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .poll-q { font-size: 16px; color: #fff; margin-bottom: 10px; }
+  .poll-result { font-size: 16px; color: #00ff00; line-height: 2.4; }
+  .top-players { margin-top: 18px; background: #330033; border: 2px inset #990099; padding: 12px; text-align: center; }
+  .tp-header { font-size: 15px; color: #ff99ff; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .tp-list { font-size: 15px; color: #ffff00; line-height: 2.2; text-align: left; }
+  .status-box { margin-top: 16px; background: #001100; border: 2px inset #00ff00; padding: 12px; text-align: center; font-size: 15px; color: #00ff00; }
+  .footer { background: #111; border-top: 2px solid #444; padding: 12px; text-align: center; font-size: 16px; color: #888; font-family: Arial, sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .pixel-divider { width: 100%; height: 8px; background: repeating-linear-gradient(90deg, #ff0000 0px, #ff0000 12px, #ffff00 12px, #ffff00 24px); margin: 12px 0; }
+  img.g { image-rendering: pixelated; vertical-align: middle; display: inline-block; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .blink { animation: blink 0.7s step-end infinite; }
+  .new-badge { background: #f00; color: #fff; font-size: 13px; font-weight: bold; padding: 2px 5px; border: 1px solid #f90; animation: blink 0.7s step-end infinite; display: inline-block; }
 </style>
-<div style="background:#000080;width:1920px;min-height:1080px;font-family:'Comic Sans MS','Comic Sans',cursive;color:#ffff00;border:4px ridge #c0c0c0;overflow:hidden">
+</head>
+<body>
+<div class="outer" id="outer">
 
-  <div style="background:#c0c0c0;padding:5px 10px;display:flex;align-items:center;gap:6px;border-bottom:2px solid #808080">
-    <span style="font-family:Arial,sans-serif;font-size:14px;color:#000;font-weight:bold">Evil Pongon Game - Official Site - Microsoft Internet Explorer</span>
+  <div class="titlebar">
+    <span>Evil Pongon Game - Official Site - Microsoft Internet Explorer</span>
+    <div class="titlebar-dots"><span>_</span><span>□</span><span>✕</span></div>
   </div>
 
-  <div style="background:#d4d0c8;padding:4px 8px;border-bottom:2px solid #808080">
-    <span style="font-family:Arial;font-size:13px;color:#000">File &nbsp; Edit &nbsp; View &nbsp; Favorites &nbsp; Tools &nbsp; Help</span>
+  <div class="menubar">
+    <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
   </div>
 
-  <marquee style="background:#ff0000;color:#ffff00;font-weight:bold;font-size:18px;padding:6px;border-top:2px solid #ff9900;border-bottom:2px solid #ff9900">
-    ★★★ WELCOME TO EVIL PONGON GAME - THE MOST EVIL GAME ON STEAM!!! ★★★ &nbsp;&nbsp;&nbsp; CLICK HERE TO WIN A FREE IPOD!!! &nbsp;&nbsp;&nbsp; 100,000 VISITORS!!! WOW!!!
-  </marquee>
+  <div class="marquee-bar">
+    <img class="g" src="https://media.giphy.com/media/l0MYGb1LuZ3n7dRnO/giphy.gif" height="28" onerror="this.style.display='none'">
+    <span class="marquee-inner">
+      ★★★ WELCOME TO EVIL PONGON GAME - THE MOST EVIL GAME ON STEAM!!! ★★★ &nbsp;&nbsp;&nbsp;&nbsp;
+      CLICK HERE TO WIN A FREE IPOD!!! &nbsp;&nbsp;&nbsp;&nbsp;
+      100,000 VISITORS!!! WOW!!! &nbsp;&nbsp;&nbsp;&nbsp;
+      ★★★ WELCOME TO EVIL PONGON GAME - THE MOST EVIL GAME ON STEAM!!! ★★★ &nbsp;&nbsp;&nbsp;&nbsp;
+      CLICK HERE TO WIN A FREE IPOD!!! &nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+    <img class="g" src="https://media.giphy.com/media/l0MYGb1LuZ3n7dRnO/giphy.gif" height="28" onerror="this.style.display='none'">
+  </div>
 
-  <div style="padding:20px;display:flex;gap:20px">
+  <div class="layout">
 
-    <div style="width:220px;flex-shrink:0;background:#000066;border:2px inset #c0c0c0;padding:14px">
-      <div style="background:#ff6600;color:#fff;font-size:15px;font-weight:bold;text-align:center;padding:6px;border:1px solid #ff9900;margin-bottom:12px">★ NAVIGATION ★</div>
-      <div style="font-size:14px;line-height:2.6;color:#00ffff">
-        <div><span class="navlink">Home</span></div>
-        <div><span class="navlink">Download</span></div>
-        <div><span class="navlink">Forums</span></div>
-        <div><span class="navlink">Screenshots</span></div>
-        <div><span class="navlink">Cheats</span></div>
-        <div><span class="navlink">Contact Us</span></div>
+    <!-- LEFT NAV -->
+    <div class="leftnav">
+      <div class="nav-header">
+        <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="20" onerror="this.style.display='none'">
+        NAVIGATION
+        <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="20" onerror="this.style.display='none'">
       </div>
-      <div style="margin-top:16px;background:#003300;border:2px inset #00ff00;padding:8px;text-align:center">
-        <div style="font-size:12px;color:#00ff00">VISITORS:</div>
-        <div style="font-size:28px;color:#00ff00;font-family:'Courier New',monospace;font-weight:bold">100,432</div>
+      <div class="navlinks">
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Home</a>
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Download</a>
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Forums</a>
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Screenshots</a>
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Cheats</a>
+        <a><img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="16" onerror="this.style.display='none'"> Contact Us</a>
       </div>
-      <div style="margin-top:14px;background:#660000;border:2px outset #c0c0c0;padding:10px;font-size:12px;color:#ffff00;text-align:center">
-        BEST VIEWED IN<br>INTERNET EXPLORER 6<br>800x600
+      <div class="counter-box">
+        <div class="counter-label">VISITORS:</div>
+        <div class="counter-num" id="counter">100,432</div>
       </div>
-      <div style="margin-top:14px;background:#003333;border:2px inset #00ffff;padding:10px;font-size:12px;color:#00ffff;text-align:center">
-        <div style="font-weight:bold;margin-bottom:6px">ONLINE NOW:</div>
-        <div style="font-size:22px;font-family:'Courier New',monospace;color:#00ff00">3</div>
-        <div style="font-size:10px;color:#888">users browsing</div>
+      <div class="ie-box">
+        BEST VIEWED IN<br>INTERNET EXPLORER 6<br>800x600<br>
+        <img class="g" src="https://media.giphy.com/media/xT9IgG50Lg7rusUPAu/giphy.gif" height="32" style="margin-top:6px" onerror="this.style.display='none'">
+      </div>
+      <div class="online-box">
+        <div style="font-weight:bold;margin-bottom:4px">ONLINE NOW:</div>
+        <div class="online-num">3</div>
+        <div style="font-size:13px;color:#888">users browsing</div>
+        <img class="g" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" height="24" style="margin-top:6px" onerror="this.style.display='none'">
       </div>
     </div>
 
-    <div style="flex:1">
+    <!-- MAIN -->
+    <div class="main">
 
-      <div style="background:#003366;border:3px ridge #ffff00;padding:16px;text-align:center;margin-bottom:16px">
-        <div style="font-size:42px;font-weight:bold;color:#ff6600;letter-spacing:3px">
-          😎 HOW TO CLAIM YOUR DROPS!!! 😎
+      <div class="hero">
+        <div style="display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:10px">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
         </div>
-        <div style="font-size:14px;color:#ffffff;margin-top:6px">LAST UPDATED: NOVEMBER 14 2009 | BY ADMIN_Xx_PongonReal_xX</div>
+        <div class="hero-title">😎 HOW TO CLAIM YOUR DROPS!!! 😎</div>
+        <div style="display:flex;justify-content:center;align-items:center;gap:16px;margin-top:10px">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+          <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="60" onerror="this.style.display='none'">
+        </div>
+        <div class="hero-sub" style="margin-top:10px">LAST UPDATED: NOVEMBER 14 2009 | BY ADMIN_Xx_PongonReal_xX</div>
       </div>
 
-      <table style="width:100%;border-collapse:collapse;border:3px ridge #c0c0c0;background:#000033;margin-bottom:16px">
-        <tr>
-          <td style="background:#ff0000;color:#ffff00;font-size:20px;font-weight:bold;padding:10px 16px;text-align:center;border-bottom:2px solid #cc0000">
-            ⚠️ FOLLOW THESE STEPS!!! ⚠️
-          </td>
-        </tr>
-        <tr>
-          <td style="padding:28px 40px">
-            <ol style="color:#ffffff;font-size:22px;line-height:3;margin:0;padding-left:32px">
-              <li style="border-bottom:1px dotted #444;padding-bottom:10px">
-                <span style="color:#00ffff;font-weight:bold">Launch the Evil Pongon Game via Steam</span>
-              </li>
-              <li style="border-bottom:1px dotted #444;padding-bottom:10px;padding-top:10px">
-                <span style="color:#00ffff;font-weight:bold">Click the Twitch logo</span>
-              </li>
-              <li style="padding-top:10px">
-                <span style="color:#00ffff;font-weight:bold">Allow Connection to your Account</span>
-              </li>
-            </ol>
-          </td>
-        </tr>
-        <tr>
-          <td style="background:#003300;padding:18px;text-align:center;border-top:2px solid #006600">
-            <span style="font-size:22px;color:#00ff00;font-weight:bold">And THAT should claim your drops after you tab back into the game!</span>
-          </td>
-        </tr>
+      <div class="pixel-divider"></div>
+
+      <table class="steps-table">
+        <tr><td class="steps-header">
+          <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="30" onerror="this.style.display='none'">
+          ⚠️ FOLLOW THESE STEPS!!! ⚠️
+          <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="30" onerror="this.style.display='none'">
+        </td></tr>
+        <tr><td class="steps-body">
+          <ol>
+            <li>
+              <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="20" onerror="this.style.display='none'">
+              <span>Launch the Evil Pongon Game via Steam</span>
+            </li>
+            <li>
+              <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="20" onerror="this.style.display='none'">
+              <span>Click the Twitch logo</span>
+            </li>
+            <li>
+              <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="20" onerror="this.style.display='none'">
+              <span>Allow Connection to your Account</span>
+            </li>
+          </ol>
+        </td></tr>
+        <tr><td class="steps-footer">
+          <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="24" onerror="this.style.display='none'">
+          And THAT should claim your drops after you tab back into the game!
+          <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="24" onerror="this.style.display='none'">
+        </td></tr>
       </table>
 
-      <table style="width:100%;border-collapse:collapse">
-        <tr>
-          <td style="width:50%;padding-right:10px;vertical-align:top">
-            <div style="background:#330000;border:2px inset #ff6600;padding:12px">
-              <div style="color:#ff6600;font-weight:bold;font-size:15px;border-bottom:1px solid #ff6600;margin-bottom:8px;padding-bottom:6px">💬 GUESTBOOK (3 entries)</div>
-              <div style="font-size:14px;color:#ffffff;line-height:2.2">
-                <div><span style="color:#ffff00">xX_d4rkn3ss_Xx:</span> omg this game is so evil lol</div>
-                <div><span style="color:#ffff00">pongmaster99:</span> best game ever!!!!!1</div>
-                <div><span style="color:#ffff00">anonymous:</span> first!!!!</div>
-              </div>
-            </div>
-          </td>
-          <td style="width:50%;padding-left:10px;vertical-align:top">
-            <div style="background:#001a33;border:2px inset #0066ff;padding:12px">
-              <div style="color:#00aaff;font-weight:bold;font-size:15px;border-bottom:1px solid #0066ff;margin-bottom:8px;padding-bottom:6px">🔥 LATEST NEWS</div>
-              <div style="font-size:14px;color:#ffffff;line-height:2.2">
-                <div>✅ New update weirdos&wackos is out!!</div>
-                <div>✅ Forums are now OPEN</div>
-                <div>✅ Wallpapers added to DL page</div>
-                <div style="color:#aaaaaa">-- more news coming soon --</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </table>
+      <div class="pixel-divider"></div>
+
+      <div class="bottom-row">
+        <div class="guestbook">
+          <div class="gb-header">
+            <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="18" onerror="this.style.display='none'">
+            💬 GUESTBOOK (3 entries)
+            <span class="new-badge">NEW</span>
+          </div>
+          <div class="gb-entry">
+            <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="14" onerror="this.style.display='none'">
+            <span class="gb-name">xX_d4rkn3ss_Xx:</span> omg this game is so evil lol
+          </div>
+          <div class="gb-entry">
+            <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="14" onerror="this.style.display='none'">
+            <span class="gb-name">pongmaster99:</span> best game ever!!!!!1
+          </div>
+          <div class="gb-entry">
+            <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="14" onerror="this.style.display='none'">
+            <span class="gb-name">anonymous:</span> first!!!!
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-header">
+            <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="18" onerror="this.style.display='none'">
+            🔥 LATEST NEWS
+          </div>
+          <div class="news-item">
+            <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="16" onerror="this.style.display='none'">
+            <span class="new-badge">NEW</span> Update <em>weirdos&amp;wackos</em> is out!!
+          </div>
+          <div class="news-item">
+            <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="14" onerror="this.style.display='none'">
+            Forums are now OPEN
+          </div>
+          <div class="news-item">
+            <img class="g" src="https://media.giphy.com/media/26tPo2M3BjLDHGDDy/giphy.gif" height="14" onerror="this.style.display='none'">
+            Wallpapers added to DL page
+          </div>
+          <div class="news-item" style="color:#aaa">-- more news coming soon --</div>
+        </div>
+      </div>
 
     </div>
 
-    <div style="width:200px;flex-shrink:0;background:#000044;border:2px inset #c0c0c0;padding:14px">
-      <div style="background:#990099;color:#fff;font-size:14px;font-weight:bold;text-align:center;padding:6px;border:1px solid #cc00cc;margin-bottom:12px">★ POLL ★</div>
-      <div style="font-size:13px;color:#ffffff;margin-bottom:10px">Is Evil Pongon the best game ever?</div>
-      <div style="font-size:12px;color:#00ff00;line-height:2.2">
+    <!-- RIGHT NAV -->
+    <div class="rightnav">
+      <div class="poll-header">
+        <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="18" onerror="this.style.display='none'">
+        ★ POLL ★
+        <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="18" onerror="this.style.display='none'">
+      </div>
+      <div class="poll-q">Is Evil Pongon the best game ever?</div>
+      <div class="poll-result">
         <div>YES!! ████████ 94%</div>
         <div>no.. █ 6%</div>
       </div>
-      <div style="margin-top:16px;background:#330033;border:2px inset #990099;padding:8px;text-align:center">
-        <div style="font-size:12px;color:#ff99ff;font-weight:bold;margin-bottom:6px">TOP PLAYERS</div>
-        <div style="font-size:12px;color:#ffff00;line-height:2">
+      <div class="top-players">
+        <div class="tp-header">
+          <img class="g" src="https://media.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.gif" height="14" onerror="this.style.display='none'">
+          TOP PLAYERS
+        </div>
+        <div class="tp-list">
           <div>1. xX_d4rkn3ss</div>
           <div>2. pongmaster99</div>
           <div>3. EvilKing2009</div>
@@ -125,17 +244,51 @@
           <div>5. GamrDude007</div>
         </div>
       </div>
-      <div style="margin-top:14px;background:#001100;border:2px inset #00ff00;padding:8px;text-align:center">
-        <div style="font-size:11px;color:#00ff00;margin-bottom:4px">SERVER STATUS</div>
-        <div style="font-size:13px;color:#00ff00;font-weight:bold">● ONLINE</div>
-        <div style="font-size:10px;color:#008800">ping: 42ms</div>
+      <div class="status-box">
+        <div>SERVER STATUS</div>
+        <div style="font-size:18px;font-weight:bold">● ONLINE</div>
+        <div style="font-size:13px;color:#008800">ping: 42ms</div>
+      </div>
+      <div style="margin-top:16px;text-align:center">
+        <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="50" onerror="this.style.display='none'">
+        <img class="g" src="https://media.giphy.com/media/MdoNE8Dp2f4VkbvdKO/giphy.gif" height="50" onerror="this.style.display='none'">
+      </div>
+      <div style="margin-top:12px;text-align:center">
+        <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="36" onerror="this.style.display='none'">
       </div>
     </div>
 
   </div>
 
-  <div style="background:#111111;border-top:2px solid #444;padding:8px;text-align:center;font-size:12px;color:#888888;font-family:Arial,sans-serif">
+  <div class="pixel-divider"></div>
+
+  <div class="footer">
+    <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="20" onerror="this.style.display='none'">
+    SITE UNDER CONSTRUCTION
+    <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="20" onerror="this.style.display='none'">
+    &nbsp;|&nbsp;
     © 2009 EvilPongon.tk - Best viewed 800x600 - Site made with Notepad - No hotlinking!!!
-    <br><span style="color:#555">This site is a fan site and not affiliated with Steam® or Twitch™</span>
+    &nbsp;|&nbsp;
+    <span>This site is a fan site and not affiliated with Steam® or Twitch™</span>
+    <img class="g" src="https://media.giphy.com/media/3o7btZ1Gm7ZL25pLMs/giphy.gif" height="20" onerror="this.style.display='none'">
   </div>
+
 </div>
+<script>
+  const outer = document.getElementById('outer');
+  function resize() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    outer.style.transform = `scale(${scale})`;
+    outer.style.marginBottom = ((1080 * scale) - 1080) + 'px';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let v = 100432;
+  setInterval(() => {
+    v += Math.floor(Math.random() * 3);
+    document.getElementById('counter').textContent = v.toLocaleString();
+  }, 4000);
+</script>
+</body>
+</html>
